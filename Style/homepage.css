@@ -30,7 +30,6 @@
 .inner-middle {
   display: flex;
   flex-direction: column;
-  
 }
 
 .footer {
@@ -50,7 +49,6 @@
 }
 
 h1 {
-
   color: #123620;
   font-family: Poppins;
   font-size: 49px;
@@ -114,7 +112,7 @@ h3 {
 }
 .footer-address img,
 .footer-contact img {
-  width: auto; 
+  width: auto;
   height: 25px;
 }
 
@@ -200,70 +198,66 @@ h2 {
 .btn-yt img {
   width: 100%;
   height: 100%;
-  
 }
 
 .btn-ig:hover,
 .btn-fb:hover,
 .btn-x:hover,
 .btn-yt:hover {
-    transition: transform 0.3s ease;
-    transform: scale(1.1);
+  transition: transform 0.3s ease;
+  transform: scale(1.1);
 }
 
 .navbar {
-    
-    
-    background-color: #ECE4D3;
-    display: flex;
-    justify-content: center;
-    
-  }
-  
-.navbar-container{
-    border-radius: 999px;
-  border: 1px solid var(--Color-Pallet-Secondary---Offwhite-S300, #E8DFCA);
-  background: #FFF;
+  background-color: #ece4d3;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-container {
+  border-radius: 999px;
+  border: 1px solid var(--Color-Pallet-Secondary---Offwhite-S300, #e8dfca);
+  background: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
   color: black;
-    padding: 0px 50px;
-}  
-  .navbar-container .left-section {
-    flex: 1;
-    margin-right: 40px;
-  }
-  
-  .navbar-container .center-section {
-    flex: 4;
-    display: flex;
-    justify-content: center;
-    padding: 0 50px;
-  }
-  
-  .navbar-container .right-section {
-    flex: 1;
-    text-align: right;
-  }
-  
-  .logo {
-    font-size: 24px;
-  }
-  
-  .nav-link {
-    text-decoration: none;
-    color:black;
-    font-size: 18px;
-    margin: 0 15px;
-    transition: transform 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    transform: scale(1.1);
-  }
-  
-  .welcome-text {
-    font-size: 18px;
-  }
+  padding: 0px 50px;
+}
+.navbar-container .left-section {
+  flex: 1;
+  margin-right: 40px;
+}
+
+.navbar-container .center-section {
+  flex: 4;
+  display: flex;
+  justify-content: center;
+  padding: 0 50px;
+}
+
+.navbar-container .right-section {
+  flex: 1;
+  text-align: right;
+}
+
+.logo {
+  font-size: 24px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  margin: 0 15px;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover {
+  transform: scale(1.1);
+}
+
+.welcome-text {
+  font-size: 18px;
+}
