@@ -1,0 +1,83 @@
+/* Color Pallete */
+:root{
+    --color1: #1a4d2e;
+    --color2: #416b52;
+    --color3: #e8dfca;
+    --color4: #fdfcfa;
+    --color5: #242529;
+}
+/* Ganti warna latar belakang tabel */
+.table {
+    background-color: var(--color3);
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    
+}
+
+/* Ganti warna latar belakang baris ganjil */
+.table tbody tr:nth-child(odd) {
+    background-color: var(--color3);
+}
+
+/* Ganti warna latar belakang baris saat dihover */
+.table tbody tr:hover {
+    background-color: var(--color4);
+}
+
+/* Ganti warna teks pada header kolom */
+.table thead th {
+    color: var(--color5);
+}
+
+/* Ganti warna teks pada body kolom */
+.table tbody td {
+    color: var(--color5);
+}
+
+/* Ganti warna teks pada tombol edit */
+.btn-warning {
+    color: #fff;
+}
+
+/* Ganti warna teks pada tombol hapus */
+.btn-danger {
+    color: #fff;
+}
+
+/* Ganti warna latar belakang pada tombol tambah data */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Ganti warna teks pada tombol tambah data */
+.btn-primary {
+    color: #fff;
+}
+
+.body{
+    background-color: var(--color1);
+}
+.body h2{
+    color: var(--color3);
+}
+
+.form-control{
+    border-radius: 24px;
+    border: 1px solid var(--Gray-20, #F3F4F6);
+    background: var(--color3);
+
+/* Shadow - inner */
+box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06) inset;
+}
+
+.searchBar{
+    display: flex;
+    width: 400px;
+    padding: 12px 1px;
+    align-items: center;
+    gap: 12px;
+}
