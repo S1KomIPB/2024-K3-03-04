@@ -1,9 +1,9 @@
 /* Reset styling */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -14,9 +14,13 @@ body {
 
 /* Navbar styling */
 .navbar {
-  background-color: #ECE4D3;
-  color: #102F1C;
-  padding: 10px 20px;
+    position: fixed; /* Make navbar fixed at the top */
+    top: 0;
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure it's above other content */
+    background-color: #ECE4D3;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25); /* Optional: adds shadow for better visibility */
 }
 
 .navbar-container {
@@ -68,11 +72,11 @@ body {
 
 /* map styling */
 .wrapper {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    padding-top: 50px; /* Add padding to account for the fixed navbar */
+    height: calc(100vh - 50px); /* Adjust height to prevent overlap with navbar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #render-map {
@@ -80,3 +84,49 @@ body {
   height: 100vh;
   background: #f4f4f4;
 }
+
+.settings-drawer {
+    position: fixed;
+    top: 0; /* Start from the top of the viewport */
+    right: 0; /* Align to the right side */
+    height: 100vh; /* Full viewport height */
+    width: 250px; /* Width of the drawer */
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    transition: right 0.3s ease;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.settings-drawer .toggle-button {
+    position: absolute;
+    left: -82px; /* Positioning the button outside the drawer */
+    top: 50%; /* Spacing from the top */
+    background: #102F1C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.settings-content {
+    margin-top: 60px; /* Spacing for content inside the drawer */
+}
+
+.setting h4 {
+    margin-bottom: 5px;
+    color: #102F1C;
+}
+
+.setting p {
+    font-size: 14px;
+    color: #666;
+}
+
+.hidden {
+    right: -250px; /* Hide the drawer off the right side of the screen */
+}
+
