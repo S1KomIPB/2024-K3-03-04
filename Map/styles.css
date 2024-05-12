@@ -1,0 +1,19 @@
+/* Gaya default untuk elemen-elemen */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#render-map {
+  width: 100%;
+  height: 100vh;
+  background: #f4f4f4;
+}
