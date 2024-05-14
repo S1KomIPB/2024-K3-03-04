@@ -54,6 +54,15 @@ function zoomOutMap() {
     Map.zoomOut();
 }
 
+// Define styles for circle markers
+const markerStyle = {
+    color: '#000',
+    fillColor: '#FF7800',
+    fillOpacity: 0.8,
+    radius: 10,
+    weight: 2
+};
+
 // Array to store the marker references
 const markers = [];
 
@@ -83,14 +92,9 @@ function filterMarkers() {
 // Add markers with popups for each position
 popupContents.forEach(content => {
     const marker = L.circleMarker(content.position, {
-        color: 'black',
-        fillColor: 'red',
-        fillOpacity: 1,
-        radius: 8,
-        weight: 1,
-        scale: content.scale, // Store the scale value in the marker options
-        interactive: true
-    });
+        ...markerStyle,
+        scale: content.scale // Store the scale value in the marker options
+    }).addTo(Map);
 
     marker.bindPopup(`
         <div style="font-family: 'Poppins', sans-serif; display: flex; align-items: center; text-align: left; padding: 10px;">
@@ -110,23 +114,39 @@ popupContents.forEach(content => {
     `);
 
     marker.on('click', function () {
-        if (marker.options.interactive) {
-            marker.setStyle({
-                color: 'black',
-                fillColor: '#4F6F52'
-            });
-        }
+        marker.setStyle({
+            fillColor: '#0000FF'
+        });
     });
 
     marker.on('popupclose', function () {
         marker.setStyle({
-            color: 'black',
-            fillColor: 'red'
+            fillColor: '#FF7800'
+        });
+    });
+
+    // Add hover effect
+    marker.on('mouseover', function () {
+        marker.setStyle({
+            radius: 15,
+            fillOpacity: 1,
+            color: '#FF0000',
+            weight: 4,
+            transition: 'all 0.3s ease'
+        });
+    });
+
+    marker.on('mouseout', function () {
+        marker.setStyle({
+            radius: 10,
+            fillOpacity: 0.8,
+            color: '#000',
+            weight: 2,
+            transition: 'all 0.3s ease'
         });
     });
 
     markers.push(marker);
-    marker.addTo(Map); // Add marker to the map initially
 });
 
 document.addEventListener("DOMContentLoaded", function () {
