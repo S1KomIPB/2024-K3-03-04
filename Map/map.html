@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,43 +14,50 @@
 </head>
 <body>
 <nav class="navbar">
-        <div class="navbar-container">
-            <div class="left-section">
-                <span class="logo">WebGIS</span>
-            </div>
-            <div class="center-section">
-          <a href="../WebGIS_web/homepage.html" class="nav-link">HomePage</a>
-          <a href="map.html" class="nav-link">Map</a>
-          <a href="../TablePage/DataTable.html" class="nav-link">Table</a>
-          <a href="#" class="nav-link">About Us</a>
+    <div class="navbar-container">
+        <div class="left-section">
+            <span class="logo">WebGIS</span>
+        </div>
+        <div class="center-section">
+            <a href="../WebGIS_web/homepage.html" class="nav-link">HomePage</a>
+            <a href="map.html" class="nav-link">Map</a>
+            <a href="../TablePage/DataTable.html" class="nav-link">Table</a>
+            <a href="#" class="nav-link">About Us</a>
         </div>
         <div class="right-section">
-          <span class="welcome-text">Welcome</span>
-        </div>
-      </div>
-    </nav>
-    <div class="wrapper">
-        <div id="render-map"></div>
-    </div>
-    <div class="settings-drawer hidden">
-        <button class="toggle-button">
-            <i class="fas fa-cog"></i>
-            <div>Settings</div> <!-- Label under the icon -->
-        </button>
-        <div class="settings-content">
-            <div class="setting">
-                <h4>Layer Settings</h4>
-                <button onclick="changeLayer('default')">Default</button>
-                <button onclick="changeLayer('satellite')">Satellite</button>
-                <button onclick="changeLayer('terrain')">Terrain</button>
-            </div>
-            <div class="setting">
-                <h4>Filter Settings</h4>
-                <p>Options to apply filters.</p>
-            </div>
+            <span class="welcome-text">Welcome</span>
         </div>
     </div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+</nav>
+<div class="wrapper">
+    <div id="render-map"></div>
+</div>
+<div class="settings-drawer hidden">
+    <button class="toggle-button">
+        <i class="fas fa-cog"></i>
+        <div>Settings</div> <!-- Label under the icon -->
+    </button>
+    <div class="settings-content">
+        <div class="setting">
+            <h4>Layer Settings</h4>
+            <button onclick="changeLayer('default')">Default</button>
+            <button onclick="changeLayer('satellite')">Satellite</button>
+            <button onclick="changeLayer('terrain')">Terrain</button>
+        </div>
+        <div class="setting">
+            <h4>Filter Settings</h4>
+            <label for="scale-filter">Filter by Scale:</label>
+            <select id="scale-filter" onchange="filterMarkers()">
+                <option value="all">All</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="popup-content.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

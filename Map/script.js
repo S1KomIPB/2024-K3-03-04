@@ -1,5 +1,3 @@
-import popupContent from './popup-content.js';
-
 const DEFAULT_COORD = [-6.5539484, 106.7207479];
 
 // Initialize the map with zoom control
@@ -34,7 +32,9 @@ setTimeout(() => {
 
 function changeLayer(type) {
     Map.eachLayer(function (layer) {
-        Map.removeLayer(layer);
+        if (layer instanceof L.TileLayer) {
+            Map.removeLayer(layer);
+        }
     });
     if (type === 'default') {
         osmTile.addTo(Map);
@@ -54,57 +54,79 @@ function zoomOutMap() {
     Map.zoomOut();
 }
 
-const markerData = popupContents.map(content => ({
-    position: content.position,
-    content: `
+// Array to store the marker references
+const markers = [];
+
+// Function to filter markers based on scale
+function filterMarkers() {
+    const filterValue = document.getElementById('scale-filter').value;
+
+    markers.forEach(marker => {
+        const markerScale = marker.options.scale;
+        if (
+            filterValue === 'all' ||
+            (filterValue === 'low' && markerScale < 5000) ||
+            (filterValue === 'medium' && markerScale >= 5000 && markerScale < 10000) ||
+            (filterValue === 'high' && markerScale >= 10000)
+        ) {
+            if (!Map.hasLayer(marker)) {
+                marker.addTo(Map);
+            }
+        } else {
+            if (Map.hasLayer(marker)) {
+                Map.removeLayer(marker);
+            }
+        }
+    });
+}
+
+// Add markers with popups for each position
+popupContents.forEach(content => {
+    const marker = L.circleMarker(content.position, {
+        color: 'black',
+        fillColor: 'red',
+        fillOpacity: 1,
+        radius: 8,
+        weight: 1,
+        scale: content.scale, // Store the scale value in the marker options
+        interactive: true
+    });
+
+    marker.bindPopup(`
         <div style="font-family: 'Poppins', sans-serif; display: flex; align-items: center; text-align: left; padding: 10px;">
             <div style="margin-right: 10px;">
                 <img src="${content.image}" alt="${content.name}" width="145" style="border-radius: 10px;">
             </div>
             <div>
                 <h2 style="margin-bottom: 5px; line-height: 2.5;">${content.name}</h2>
-                <div style="line-height: 1.5;"> 
-                    <p style="margin: 2px 0;"><strong>ID :</strong> ${content.id}</p> 
-                    <p style="margin: 2px 0;"><strong>Nama :</strong> ${content.name}</p> 
-                    <p style="margin: 2px 0;"><strong>Nama Latin :</strong> 
-                      <span style="font-style: italic;">${content.latinName}</span></p> 
-                    <p style="margin: 2px 0;"><strong>Persebaran :</strong> ${content.distribution}</p> 
-                    <p style="margin: 2px 0;"><strong>Skala :</strong> ${content.scale}</p>
-                    <p style="margin: 2px 0;"><strong>Jumlah :</strong> ${content.count}</p> 
+                <div style="line-height: 1.5;">
+                    <p style="margin: 2px 0;"><strong>Nama Latin:</strong> <span style="font-style: italic;">${content.latinName}</span></p>
+                    <p style="margin: 2px 0;"><strong>Persebaran:</strong> ${content.distribution}</p>
+                    <p style="margin: 2px 0;"><strong>Skala:</strong> ${content.scale}</p>
+                    <p style="margin: 2px 0;"><strong>Jumlah:</strong> ${content.count}</p>
                 </div>
             </div>
         </div>
-    `
-}));
+    `);
 
-// Add markers with popups for each position
-markerData.forEach(data => {
-    const marker = L.circleMarker(data.position, {
-        color: 'black',
-        fillColor: 'red',
-        fillOpacity: 1,
-        radius: 8,
-        weight: 1
-    }).addTo(Map);
+    marker.on('click', function () {
+        if (marker.options.interactive) {
+            marker.setStyle({
+                color: 'black',
+                fillColor: '#4F6F52'
+            });
+        }
+    });
 
-     marker.bindPopup(data.content, {
-        maxWidth: 400,
-        maxHeight: 350, 
-    });
-  
-    marker.on('click', function() {
-        marker.setStyle({
-            color: 'black', 
-            fillColor: '#4F6F52'
-        });
-    });
-    
-    marker.on('popupclose', function() {
+    marker.on('popupclose', function () {
         marker.setStyle({
             color: 'black',
-            fillColor: 'red' 
+            fillColor: 'red'
         });
     });
+
+    markers.push(marker);
+    marker.addTo(Map); // Add marker to the map initially
 });
 
 document.addEventListener("DOMContentLoaded", function () {

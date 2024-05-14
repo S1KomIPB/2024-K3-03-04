@@ -1,3 +1,4 @@
+
 const popupContents = [
     {
         id: 1,
@@ -7,7 +8,7 @@ const popupContents = [
         scale: 12113,
         count: 10,
         image: 'https://th.bing.com/th/id/OIP.jcnZe63m50BCYrWDgDc3RQHaLG?rs=1&pid=ImgDetMain',
-        position: [-6.56006,106.72829] // 
+        position: [-6.56006, 106.72829]
     },
     {
         id: 2,
@@ -17,7 +18,7 @@ const popupContents = [
         scale: 12331,
         count: 20,
         image: 'https://www.teahub.io/photos/full/36-366587_gambar-bunga-mawar-.png',
-        position: [-6.55602, 106.72573] 
+        position: [-6.55602, 106.72573]
     },
     {
         id: 3,
@@ -29,8 +30,5 @@ const popupContents = [
         image: 'https://th.bing.com/th/id/OIP.2pvhaelQdfcsNqed8A65-QAAAA?rs=1&pid=ImgDetMain',
         position: [-6.5566, 106.7249]
     },
-    // ADD MORE HERE
+    // Add more here
 ];
-  
-  export default popupContents;
-  
