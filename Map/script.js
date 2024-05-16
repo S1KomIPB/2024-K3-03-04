@@ -11,18 +11,29 @@ Map.zoomControl.setPosition('bottomright');
 const osmTile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors',
     maxZoom: 20,
-    minZoom: 2
+    minZoom: 2,
+    useCache: true,
+    crossOrigin: true,
+    cacheMaxAge: 24 * 3600 * 1000 // Cache tiles for 24 hours
 });
+
 const satellite = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     minZoom: 2,
     attribution: 'Imagery ©2022 Google',
-    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+    useCache: true,
+    crossOrigin: true,
+    cacheMaxAge: 24 * 3600 * 1000 // Cache tiles for 24 hours
 });
+
 const terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
     attribution: 'Data © OpenTopoMap (CC-BY-SA)',
     maxZoom: 20,
-    minZoom: 2
+    minZoom: 2,
+    useCache: true,
+    crossOrigin: true,
+    cacheMaxAge: 24 * 3600 * 1000 // Cache tiles for 24 hours
 });
 
 // Add the default layer asynchronously
