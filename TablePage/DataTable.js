@@ -1,6 +1,6 @@
 // Data tanaman
 var tanaman = [
-    { GID: 1, ID: "T001", Nama: "Anggrek", NamaLatin: "Orchidaceae", JenisTanaman: "Hias" , Lokasi: "CCR" },
+    { GID: 1, ID: "T001", Nama: "Anggrek", NamaLatin: "Orchidaceae", JenisTanaman: "Hias", Lokasi: "CCR" },
     { GID: 2, ID: "T002", Nama: "Melati", NamaLatin: "Jasminum", JenisTanaman: "Hias", Lokasi: "CCR" },
     { GID: 3, ID: "T003", Nama: "Padi", NamaLatin: "Oryza sativa", JenisTanaman: "Pangan", Lokasi: "CCR" },
     { GID: 4, ID: "T004", Nama: "Padi", NamaLatin: "Oryza sativa", JenisTanaman: "Pangan", Lokasi: "CCR" },
@@ -18,7 +18,7 @@ var tanaman = [
 function populateTable() {
     var tableBody = document.getElementById("dataTableBody");
     tableBody.innerHTML = ""; // Bersihkan isi tabel sebelumnya
-    tanaman.forEach(function(tanaman) {
+    tanaman.forEach(function (tanaman) {
         var row = `<tr>
                         <td>${tanaman.GID}</td>
                         <td>${tanaman.ID}</td>
@@ -38,15 +38,17 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
     let rows = document.getElementById("dataTableBody").getElementsByTagName("tr");
 
     for (let i = 0; i < rows.length; i++) {
-        let name = rows[i].getElementsByTagName("td")[0];
-        let age = rows[i].getElementsByTagName("td")[1];
-        let address = rows[i].getElementsByTagName("td")[2];
-        
-        if (name || age || address) {
-            let nameText = name.textContent.toLowerCase();
-            let ageText = age.textContent.toLowerCase();
-            let addressText = address.textContent.toLowerCase();
-            if (nameText.indexOf(filter) > -1 || ageText.indexOf(filter) > -1 || addressText.indexOf(filter) > -1) {
+        let cells = rows[i].getElementsByTagName("td"); 
+
+        if (cells.length > 0) {  // Check if there are cells
+            let plantId = cells[0].textContent.toLowerCase();
+            let plantName = cells[1].textContent.toLowerCase();
+            let scientificName = cells[2].textContent.toLowerCase();
+            if (
+                plantId.indexOf(filter) > -1 ||
+                plantName.indexOf(filter) > -1 ||
+                scientificName.indexOf(filter) > -1
+            ) {
                 rows[i].style.display = "";
             } else {
                 rows[i].style.display = "none";
@@ -57,7 +59,7 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
 
 
 // Panggil fungsi untuk mengisi tabel saat halaman dimuat
-populateTable();
+// populateTable();
 
 // Tambahkan event listener untuk tombol tambah data
 document.getElementById("tambahData").addEventListener("click", tambahDataBaru);
