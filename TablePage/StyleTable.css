@@ -191,6 +191,10 @@ box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06) inset;
     right: -330px
 }
 
+.prev:hover{
+    background-color: #F3F4F6;
+}
+
 .next {
     width: 38px; /* Diameter lingkaran */
     height: 38px; /* Diameter lingkaran */
@@ -208,7 +212,9 @@ box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06) inset;
     right: -380px
 }
 
-
+.next:hover{
+    background-color: #F3F4F6;
+}
 
 .rowmb-3{
     display: flex;
