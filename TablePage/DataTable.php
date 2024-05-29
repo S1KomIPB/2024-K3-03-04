@@ -40,12 +40,12 @@ include '../configuration.php';
                 </thead>
                 <tbody id="dataTableBody">
                     <?php
-                    $queryTable = pg_query($dbconn, "SELECT * FROM ipb_biodiversity");
+                    $queryTable = pg_query($dbconn, "SELECT * FROM ipb_biodiversity"); // change based on your table
                     while ($listPlantData = pg_fetch_array($queryTable)) {
                         echo "<tr>";
                         echo "<td>" . $listPlantData["id"] . "</td>";
                         echo "<td>" . $listPlantData["Nama"] . "</td>";
-                        echo "<td>" . $listPlantData["Nama Latin"] . "</td>";
+                        echo "<td>" . $listPlantData["Nama_Latin"] . "</td>";
                         echo "<td>" . $listPlantData["Kategori"] . "</td>";
                         echo "<td>" . $listPlantData["Lokasi"] . "</td>";
                         echo "<td>";
