@@ -1,3 +1,7 @@
+body {
+  font-family: 'Poppins', sans-serif; /* Mengubah font untuk semua teks dalam halaman */
+}
+
 * {
   margin: 0;
   padding: 0;

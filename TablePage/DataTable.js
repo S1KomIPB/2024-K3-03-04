@@ -1,7 +1,7 @@
 // Data tanaman
 var tanaman = [
-    { GID: 1, ID: "T001", Nama: "Anggrek", NamaLatin: "Orchidaceae", JenisTanaman: "Hias" , Lokasi: "CCR" },
-    { GID: 2, ID: "T002", Nama: "Melati", NamaLatin: "Jasminum", JenisTanaman: "Hias", Lokasi: "CCR" },
+    { GID: 1, ID: "T001", Nama: "Anggrek", NamaLatin: "Orchidaceae", JenisTanaman: "Hias" , Lokasi: "CCR", Gambar: "url_to_anggrek_image" },
+    { GID: 2, ID: "T002", Nama: "Melati", NamaLatin: "Jasminum", JenisTanaman: "Hias", Lokasi: "CCR", Gambar: "url_to_melati_image" },
     { GID: 3, ID: "T003", Nama: "Padi", NamaLatin: "Oryza sativa", JenisTanaman: "Pangan", Lokasi: "FAPERTA" },
     { GID: 4, ID: "T004", Nama: "Kangkung", NamaLatin: "Kangkung Sativa", JenisTanaman: "Pangan", Lokasi: "CCR" },
     { GID: 5, ID: "T005", Nama: "Padi", NamaLatin: "Oryza sativa", JenisTanaman: "Pangan", Lokasi: "CCR" },
@@ -47,6 +47,7 @@ function populateTable(filteredTanaman = tanaman) {
                     <td>${tanaman.NamaLatin}</td>
                     <td>${tanaman.JenisTanaman}</td>
                     <td>${tanaman.Lokasi}</td>
+                    <td><img src="${tanaman.Gambar}" alt="${tanaman.Nama}" style="width:50px;height:50px;"></td>
                     </tr>`;
         tableBody.innerHTML += row;
     });
