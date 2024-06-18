@@ -9,7 +9,7 @@ WebGIS Biodiversitas IPB University adalah sebuah website yang dirancang khusus 
 ![Homepage](Media/Images/Profile/homepage.jpeg)
 
 
-## Authors
+## Tim Front-end
 
 | Nama                     | NIM         |
 |--------------------------|-------------|
@@ -25,3 +25,15 @@ WebGIS Biodiversitas IPB University adalah sebuah website yang dirancang khusus 
 | Ester Bina Br. Damanik   | G6401211030 |
 | Giras Arya Ichsani       | G6401211047 |
 | Fathan Abdul Mu'ti       | G6401211020 |
+
+## Tim Back-end
+
+| Nama                     | NIM         |
+|--------------------------|-------------|
+| DAFFA NOFIANSYAH         | G6401211098 |
+| Medina Fitri Maulida     | G6401211096 |
+| NISMARA MAYZALIA         | G6401211027 |
+| Ester Bina Br. Damanik   | G6401211030 |
+| Giras Arya Ichsani       | G6401211047 |
+| Fathan Abdul Mu'ti       | G6401211020 |
+
