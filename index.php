@@ -21,7 +21,7 @@
           <a href="index.php" class="nav-link">HomePage</a>
             <a href="Map/map.html" class="nav-link">Map</a>
             <a href="TablePage/DataTable.php" class="nav-link">Table</a>
-            <a href="#" class="nav-link">About Us</a>
+            
           </div>
           <div class="right-section">
             <div class="welcome-text">Welcome</div>
