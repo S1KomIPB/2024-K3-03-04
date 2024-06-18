@@ -148,7 +148,7 @@ nextButton.addEventListener('click', () => {
 displayData(filteredTanaman, currentPage, itemsPerPage);
 
 // Panggil fungsi untuk mengisi tabel saat halaman dimuat
-// populateTable();
+populateTable();
 
 // Tambahkan event listener untuk tombol tambah data
 document.getElementById("tambahData").addEventListener("click", tambahDataBaru);
