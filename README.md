@@ -6,7 +6,7 @@ WebGIS Biodiversitas IPB University adalah sebuah website yang dirancang khusus 
 
 ## Documentation
 
-[Homepage](Media/Images/Profile/homepage.jpeg)
+![Homepage](Media/Images/Profile/homepage.jpeg)
 
 
 ## Authors
