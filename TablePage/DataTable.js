@@ -34,40 +34,40 @@ var tanaman = [
     // Tambahkan data lain di sini
 ];
 
-// Fungsi untuk mengisi tabel dengan data tanaman
-function populateTable(filteredTanaman = tanaman) {
-    var tableBody = document.getElementById("dataTableBody");
-    tableBody.innerHTML = ""; // Bersihkan isi tabel sebelumnya
+let filteredTanaman = tanaman; // Maintain a filtered list for display
 
-    filteredTanaman.forEach(function(tanaman) {
-        var row = `<tr>
-                    <td>${tanaman.GID}</td>
-                    <td>${tanaman.ID}</td>
-                    <td>${tanaman.Nama}</td>
-                    <td>${tanaman.NamaLatin}</td>
-                    <td>${tanaman.JenisTanaman}</td>
-                    <td>${tanaman.Lokasi}</td>
-                    <td><img src="${tanaman.Gambar}" alt="${tanaman.Nama}" style="width:50px;height:50px;"></td>
-                    </tr>`;
-        tableBody.innerHTML += row;
-    });
+// Fungsi untuk mengisi tabel dengan data tanaman
+
+function populateTable() {
+    displayData(filteredTanaman, currentPage, itemsPerPage);
 }
 
-  // Search Bar
+// Search Bar
 document.getElementById("searchInput").addEventListener("keyup", function() {
-    const filter = this.value.toLowerCase();
-    const filteredTanaman = tanaman.filter(item => {
-        return item.Nama.toLowerCase().includes(filter) ||
-                item.NamaLatin.toLowerCase().includes(filter) ||
-                item.JenisTanaman.toLowerCase().includes(filter) ||
-                item.Lokasi.toLowerCase().includes(filter);
-    });
-
-    populateTable(filteredTanaman); // Perbarui tabel dengan data yang sudah difilter
+    filterTanaman();
 });
 
+// Add event listeners for location and type filters
+document.getElementById("locationFilter").addEventListener("change", filterTanaman);
+document.getElementById("typeFilter").addEventListener("change", filterTanaman);
 
-// Ambil data tanaman (pastikan Anda memiliki array tanaman yang telah didefinisikan)
+function filterTanaman() {
+    const searchInput = document.getElementById("searchInput").value.toLowerCase();
+    const locationFilter = document.getElementById("locationFilter").value;
+    const typeFilter = document.getElementById("typeFilter").value;
+
+    filteredTanaman = tanaman.filter(item => {
+        return (
+            (locationFilter === "" || item.Lokasi === locationFilter) &&
+            (typeFilter === "" || item.JenisTanaman === typeFilter) &&
+            (item.Nama.toLowerCase().includes(searchInput) ||
+            item.NamaLatin.toLowerCase().includes(searchInput))
+        );
+    });
+
+    currentPage = 1; // Reset to the first page whenever filters change
+    displayData(filteredTanaman, currentPage, itemsPerPage);
+}
 
 // Mendapatkan elemen-elemen yang dibutuhkan
 const itemPerPageSelect = document.getElementById("item-per-page-wrapper");
@@ -77,73 +77,58 @@ const prevButton = document.querySelector('.prev');
 const nextButton = document.querySelector('.next');
 
 let currentPage = 1;
-let itemsPerPage = 10; // Nilai awal item per halaman
+let itemsPerPage = parseInt(itemPerPageSelect.value);
 
 /* Fungsi DropDown Item Perpage dan Button Next or Undo Page */
 // Fungsi untuk menampilkan data dalam tabel
 function displayData(items, page, perPage) {
-    tableBody.innerHTML = ''; 
+    tableBody.innerHTML = ''; // Clear table body
 
     const startIdx = (page - 1) * perPage;
     const endIdx = startIdx + perPage;
     const currentItems = items.slice(startIdx, endIdx);
 
-currentItems.forEach(item => {
-    const row = tableBody.insertRow();
-    Object.values(item).forEach(value => {
-        row.insertCell().textContent = value;
+    currentItems.forEach(item => {
+        const row = tableBody.insertRow();
+        Object.values(item).forEach(value => {
+            row.insertCell().textContent = value;
+        });
     });
-});
 
     updatePageInfo(page, items.length, perPage);
 }
 
 // Fungsi untuk update pagination info
 function updatePageInfo(page, totalItems, perPage) {
-  const startItem = (page - 1) * perPage + 1;
+    const startItem = (page - 1) * perPage + 1;
     const endItem = Math.min(startItem + perPage - 1, totalItems);
-    pageInfo.textContent = `${startItem}-${endItem} of ${totalItems} pages`;
+    pageInfo.textContent = `Showing ${startItem}-${endItem} of ${totalItems}`;
 }
 
 // Event listener untuk perubahan pada dropdown item per page dan tombol navigasi halaman
 itemPerPageSelect.addEventListener("change", () => {
     itemsPerPage = parseInt(itemPerPageSelect.value);
     currentPage = 1;
-    displayData(tanaman, currentPage, itemsPerPage);
+    displayData(filteredTanaman, currentPage, itemsPerPage);
 });
 
 prevButton.addEventListener('click', () => {
     if (currentPage > 1) {
         currentPage--;
-        displayData(tanaman, currentPage, itemsPerPage);
+        displayData(filteredTanaman, currentPage, itemsPerPage);
     }
 });
 
 nextButton.addEventListener('click', () => {
-    const totalPages = Math.ceil(tanaman.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredTanaman.length / itemsPerPage);
     if (currentPage < totalPages) {
-    currentPage++;
-    displayData(tanaman, currentPage, itemsPerPage);
+        currentPage++;
+        displayData(filteredTanaman, currentPage, itemsPerPage);
     }
 });
 
-
-function searchTanaman() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const filteredTanaman = tanaman.filter(item => {
-    return Object.values(item).some(value => 
-        String(value).toLowerCase().includes(searchTerm)
-    );
-});
-
-    currentPage = 1;
-    displayData(filteredTanaman, currentPage, itemsPerPage);
-}
-
-document.getElementById('searchInput').addEventListener('input', searchTanaman);
-
 // Tampilkan data awal
-displayData(tanaman, currentPage, itemsPerPage);
+displayData(filteredTanaman, currentPage, itemsPerPage);
 
 // Panggil fungsi untuk mengisi tabel saat halaman dimuat
 populateTable();

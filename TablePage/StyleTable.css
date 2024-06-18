@@ -108,13 +108,14 @@ box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06) inset;
     background-position: right 0.75rem center; /* Mengatur posisi panah dropdown */
     background-size: 1em; /* Mengatur ukuran panah dropdown */
     padding: 7px;
-    width: 100px; /* Menyesuaikan lebar tombol */
+    /* width: 100px; Menyesuaikan lebar tombol */
+    font-size:14px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06) inset;
     margin-top: -2px; /* Menambahkan jarak antara label dan dropdown */
-    transform: translateX(100px);
+    /* transform: translateX(100px); */
 }
 
 .item-per-page-wrapper {
@@ -129,7 +130,6 @@ box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06) inset;
 .item-per-page-wrapper label {
     font-size: 14px;
     margin-bottom: 3px; /* Jarak antara label dan select */
-    transform: translateX(100px);
     color: white; /* Mengubah warna teks menjadi putih */
 }
 

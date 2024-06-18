@@ -100,64 +100,71 @@ function filterMarkers() {
     });
 }
 
-// Add markers with popups for each position
-popupContents.forEach(content => {
-    const marker = L.circleMarker(content.position, {
-        ...markerStyle,
-        scale: content.scale // Store the scale value in the marker options
-    }).addTo(Map);
+function createCustomIcon(iconUrl) {
+    return new L.Icon({
+        iconUrl: iconUrl,
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+}
 
-    marker.bindPopup(`
-        <div style="font-family: 'Poppins', sans-serif; display: flex; align-items: center; text-align: left; padding: 10px;">
-            <div style="margin-right: 10px;">
-                <img src="${content.image}" alt="${content.name}" width="145" style="border-radius: 10px;">
-            </div>
-            <div>
-                <h2 style="margin-bottom: 5px; line-height: 2.5;">${content.name}</h2>
-                <div style="line-height: 1.5;">
-                    <p style="margin: 2px 0;"><strong>Nama Latin:</strong> <span style="font-style: italic;">${content.latinName}</span></p>
-                    <p style="margin: 2px 0;"><strong>Persebaran:</strong> ${content.distribution}</p>
-                    <p style="margin: 2px 0;"><strong>Skala:</strong> ${content.scale}</p>
-                    <p style="margin: 2px 0;"><strong>Jumlah:</strong> ${content.count}</p>
+var blueIcon = createCustomIcon('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png');
+var redIcon = createCustomIcon('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png');
+var greenIcon = createCustomIcon('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png');
+var yellowIcon = createCustomIcon('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png');
+var violetIcon = createCustomIcon('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png');
+var blackIcon = createCustomIcon('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png');
+
+
+var wfs_url = "http://localhost:8080/geoserver/cite/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=cite%3AIPB_Biodiversity&maxFeatures=50&outputFormat=application%2Fjson";
+
+$.getJSON(wfs_url).then((res) => {
+    var layer = L.geoJson(res, {
+        // Ubah warna marker berdasarkan kategori
+        pointToLayer: function (feature, latlng) {
+            let markerColor;
+            switch (feature.properties.Kategori) {
+                case 'tanaman aromatik':
+                    markerColor = blueIcon;
+                    break;
+                case 'tanaman pelindung':
+                    markerColor = redIcon;
+                    break;
+                case 'tanaman pangan':
+                    markerColor = greenIcon;
+                    break;
+                case 'tanaman hias':
+                    markerColor = yellowIcon;
+                    break;
+                case 'tanaman herbal':
+                    markerColor = violetIcon;
+                    break;
+                default:
+                    markerColor = blackIcon;
+            }
+            return L.marker(latlng, { icon: markerColor });
+        },
+        onEachFeature: function (f, l) {
+            l.bindPopup(`
+            <div style="font-family: 'Poppins', sans-serif; display: flex; align-items: center; text-align: left; padding: 10px;">
+                <div style="margin-right: 10px;">
+                    <img src="../Media/Images/Map/${f.properties.Foto}" alt="${f.properties.Foto}" width="145" style="border-radius: 10px;">
+                </div>
+                <div>
+                    <h2 style="margin-bottom: 5px; line-height: 2.5;">${f.properties.Nama}</h2>
+                    <div style="line-height: 1.5;">
+                        <p style="margin: 2px 0;"><strong>Nama Latin:</strong> <span style="font-style: italic;">${f.properties['Nama Latin']}</span></p>
+                        <p style="margin: 2px 0;"><strong>Kategori:</strong> ${f.properties.Kategori}</p>
+                        <p style="margin: 2px 0;"><strong>Lokasi:</strong> ${f.properties.Lokasi}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    `);
-
-    marker.on('click', function () {
-        marker.setStyle({
-            fillColor: '#0000FF'
-        });
-    });
-
-    marker.on('popupclose', function () {
-        marker.setStyle({
-            fillColor: '#FF7800'
-        });
-    });
-
-    // Add hover effect
-    marker.on('mouseover', function () {
-        marker.setStyle({
-            radius: 15,
-            fillOpacity: 1,
-            color: '#FF0000',
-            weight: 4,
-            transition: 'all 0.3s ease'
-        });
-    });
-
-    marker.on('mouseout', function () {
-        marker.setStyle({
-            radius: 10,
-            fillOpacity: 0.8,
-            color: '#000',
-            weight: 2,
-            transition: 'all 0.3s ease'
-        });
-    });
-
-    markers.push(marker);
+        `);
+        }
+    }).addTo(Map);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
