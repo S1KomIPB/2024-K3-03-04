@@ -5,7 +5,7 @@ const Map = L.map('render-map', {
     zoomControl: true
 }).setView(DEFAULT_COORD, 15);
 
-Map.zoomControl.setPosition('bottomright');
+Map.zoomControl.setPosition("bottomright");
 
 // Define layers
 const osmTile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -185,4 +185,31 @@ document.addEventListener("DOMContentLoaded", function () {
     zoomOutButton.innerText = 'Zoom Out';
     zoomOutButton.onclick = zoomOutMap;
     document.body.appendChild(zoomOutButton);
+});
+
+// GEOSERVER LAYER CONNECT
+
+var wfs_url =
+  "http://localhost:8080/geoserver/cite/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=cite%3Aipb_biodiversity&maxFeatures=50&outputFormat=application%2Fjson";
+
+$.getJSON(wfs_url).then((res) => {
+  var layer = L.geoJson(res, {
+    onEachFeature: function (f, l) {
+      l.bindPopup(`
+            <div style="font-family: 'Poppins', sans-serif; display: flex; align-items: center; text-align: left; padding: 10px;">
+                <div style="margin-right: 10px;">
+                    <img src="${f.properties.Foto_URL}" alt="${f.properties.Foto_URL}" width="145" height="145" style="border-radius: 10px; object-fit: cover;">
+                </div>
+                <div>
+                    <h2 style="margin-bottom: 5px; line-height: 1.25;">${f.properties.Nama}</h2>
+                    <div style="line-height: 1.5;">
+                        <p style="margin: 2px 0;"><strong>Nama Latin:</strong><br><span style="font-style: italic;">${f.properties.Nama_Latin}</span></p>
+                        <p style="margin: 2px 0;"><strong>Kategori:</strong><br>${f.properties.Kategori}</p>
+                        <p style="margin: 2px 0;"><strong>Lokasi:</strong><br>${f.properties.Lokasi}</p>
+                    </div>
+                </div>
+            </div>
+        `);
+    },
+  }).addTo(Map);
 });

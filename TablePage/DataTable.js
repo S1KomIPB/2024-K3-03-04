@@ -4,6 +4,10 @@ var tanaman = [
     { GID: 2, ID: "T002", Nama: "Melati", NamaLatin: "Jasminum", JenisTanaman: "Hias", Lokasi: "CCR", Gambar: "url_to_melati_image" },
     { GID: 3, ID: "T003", Nama: "Padi", NamaLatin: "Oryza sativa", JenisTanaman: "Pangan", Lokasi: "FAPERTA" },
     { GID: 4, ID: "T004", Nama: "Kangkung", NamaLatin: "Kangkung Sativa", JenisTanaman: "Pangan", Lokasi: "CCR" },
+    { GID: 1, ID: "T001", Nama: "Anggrek", NamaLatin: "Orchidaceae", JenisTanaman: "Hias", Lokasi: "CCR" },
+    { GID: 2, ID: "T002", Nama: "Melati", NamaLatin: "Jasminum", JenisTanaman: "Hias", Lokasi: "CCR" },
+    { GID: 3, ID: "T003", Nama: "Padi", NamaLatin: "Oryza sativa", JenisTanaman: "Pangan", Lokasi: "CCR" },
+    { GID: 4, ID: "T004", Nama: "Padi", NamaLatin: "Oryza sativa", JenisTanaman: "Pangan", Lokasi: "CCR" },
     { GID: 5, ID: "T005", Nama: "Padi", NamaLatin: "Oryza sativa", JenisTanaman: "Pangan", Lokasi: "CCR" },
     { GID: 6, ID: "T006", Nama: "Tomat", NamaLatin: "Tomat sativa", JenisTanaman: "Pangan", Lokasi: "FAHUTAN" },
     { GID: 7, ID: "T007", Nama: "Padi", NamaLatin: "Oryza sativa", JenisTanaman: "Pangan", Lokasi: "CCR" },
@@ -39,6 +43,19 @@ let filteredTanaman = tanaman; // Maintain a filtered list for display
 // Fungsi untuk mengisi tabel dengan data tanaman
 
 function populateTable() {
+    var tableBody = document.getElementById("dataTableBody");
+    tableBody.innerHTML = ""; // Bersihkan isi tabel sebelumnya
+    tanaman.forEach(function (tanaman) {
+        var row = `<tr>
+                        <td>${tanaman.GID}</td>
+                        <td>${tanaman.ID}</td>
+                        <td>${tanaman.Nama}</td>
+                        <td>${tanaman.NamaLatin}</td>
+                        <td>${tanaman.JenisTanaman}</td>
+                        <td>${tanaman.Lokasi}</td>
+                    </tr>`;
+        tableBody.innerHTML += row;
+    });
     displayData(filteredTanaman, currentPage, itemsPerPage);
 }
 
