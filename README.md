@@ -19,12 +19,6 @@ WebGIS Biodiversitas IPB University adalah sebuah website yang dirancang khusus 
 | Nechita Samantha         | G6401211043 |
 | Bella Agama              | G6401211038 |
 | Fatha Ariya Prasetya     | G6401211078 |
-| DAFFA NOFIANSYAH         | G6401211098 |
-| Medina Fitri Maulida     | G6401211096 |
-| NISMARA MAYZALIA         | G6401211027 |
-| Ester Bina Br. Damanik   | G6401211030 |
-| Giras Arya Ichsani       | G6401211047 |
-| Fathan Abdul Mu'ti       | G6401211020 |
 
 ## Tim Back-end
 
